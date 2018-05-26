@@ -134,8 +134,9 @@ for x in range(USER_NUM):
     for i in indexArray:
         predictArray[index] = Predict(x, i, meanOverAll, bx, bi, Q, PT)
         epsiloxi = gradeArray[index] - predictArray[index]
-        SSE += epsiloxi**2
+        # test_SSE += epsiloxi**2
+        test_SSE += epsiloxi**2 + Lambda * (np.sum(np.square(Q[i,:])) + np.sum(np.square(PT[:,x])) + (bx[x]**2) + np.sum(bi[i]**2))
         index += 1
-RMSE = np.sqrt(SSE/size_test)
+RMSE = np.sqrt(test_SSE/size_test)
 print("Test Result: ", RMSE)
 print("------------------------------------")
